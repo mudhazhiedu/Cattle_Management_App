@@ -25,8 +25,9 @@ cp .env.example .env
 sed -i 's/change_me/'"$(openssl rand -base64 32)"'/g' .env
 sed -i 's/change_this_jwt_secret/'"$(openssl rand -base64 32)"'/g' .env
 
-# Start services
-docker-compose -f docker-compose.prod.yml up -d --build
+# Pull and start pre-built images
+docker-compose -f docker-compose.ec2.yml pull
+docker-compose -f docker-compose.ec2.yml up -d
 
 echo "✅ Deployment complete!"
 echo "Access your app at: http://$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"

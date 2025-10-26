@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: cattle_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-cattle_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change_me}
+      POSTGRES_DB: ${DB_NAME:-cattle_management_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    mem_limit: 256m
+    command: postgres -c shared_buffers=128MB -c max_connections=50
+
+  backend:
+    image: ghcr.io/mudhazhiedu/cattle_management_app-backend:latest
+    container_name: cattle_backend
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER:-cattle_admin}:${DB_PASSWORD:-change_me}@postgres:5432/${DB_NAME:-cattle_management_db}
+      - PORT=5000
+      - NODE_ENV=production
+      - JWT_SECRET=${JWT_SECRET}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    mem_limit: 256m
+
+  frontend:
+    image: ghcr.io/mudhazhiedu/cattle_management_app-frontend:latest
+    container_name: cattle_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    mem_limit: 128m
+
+volumes:
+  postgres_data:
