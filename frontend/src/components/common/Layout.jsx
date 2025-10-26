@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon, Logout as LogoutIcon } from '@mui/icons-material';
+import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon, LocalHospital as HealthIcon, AccountBalance as FinancialIcon, Logout as LogoutIcon } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -44,6 +44,22 @@ export default function Layout({ children }) {
             sx={{ fontWeight: location.pathname === '/breeding' ? 'bold' : 'normal' }}
           >
             Breeding
+          </Button>
+          <Button
+            color="inherit"
+            startIcon={<HealthIcon />}
+            onClick={() => navigate('/health')}
+            sx={{ fontWeight: location.pathname === '/health' ? 'bold' : 'normal' }}
+          >
+            Health
+          </Button>
+          <Button
+            color="inherit"
+            startIcon={<FinancialIcon />}
+            onClick={() => navigate('/financial')}
+            sx={{ fontWeight: location.pathname === '/financial' ? 'bold' : 'normal' }}
+          >
+            Financial
           </Button>
           <Box sx={{ ml: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography variant="body2">

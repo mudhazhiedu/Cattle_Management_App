@@ -9,6 +9,8 @@ import Dashboard from './pages/dashboard/Dashboard';
 import CowList from './pages/cows/CowList';
 import CowDetail from './pages/cows/CowDetail';
 import BreedingManagement from './pages/breeding/BreedingManagement';
+import HealthManagement from './pages/health/HealthManagement';
+import FinancialManagement from './pages/financial/FinancialManagement';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +39,8 @@ function App() {
                     <Route path="/cows" element={<CowList />} />
                     <Route path="/cows/:id" element={<CowDetail />} />
                     <Route path="/breeding" element={<BreedingManagement />} />
+                    <Route path="/health" element={<HealthManagement />} />
+                    <Route path="/financial" element={<FinancialManagement />} />
                   </Routes>
                 </Layout>
               </ProtectedRoute>

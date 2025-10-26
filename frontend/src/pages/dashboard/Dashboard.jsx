@@ -10,6 +10,7 @@ import {
 } from '@mui/icons-material';
 import axios from '../../services/api';
 import MilkingForm from '../../components/milking/MilkingForm';
+import RemindersWidget from '../../components/reminders/RemindersWidget';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -126,7 +127,11 @@ export default function Dashboard() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
+          <RemindersWidget />
+        </Grid>
+
+        <Grid item xs={12} md={6}>
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" gutterBottom>
               Recent Milking Records

@@ -8,6 +8,9 @@ const HeatRecord = require('./heat')(sequelize);
 const AIRecord = require('./ai')(sequelize);
 const PregnancyRecord = require('./pregnancy')(sequelize);
 const CalvingRecord = require('./calving')(sequelize);
+const Reminder = require('./reminder')(sequelize);
+const HealthRecord = require('./health')(sequelize);
+const FinancialTransaction = require('./financial')(sequelize);
 
 // Associations
 Cow.hasMany(MilkingRecord, { foreignKey: 'cow_id', as: 'milking_records' });
@@ -27,6 +30,15 @@ Cow.hasMany(CalvingRecord, { foreignKey: 'cow_id', as: 'calving_records' });
 CalvingRecord.belongsTo(Cow, { foreignKey: 'cow_id', as: 'cow' });
 CalvingRecord.belongsTo(PregnancyRecord, { foreignKey: 'pregnancy_id', as: 'pregnancy' });
 
+Cow.hasMany(Reminder, { foreignKey: 'cow_id', as: 'reminders' });
+Reminder.belongsTo(Cow, { foreignKey: 'cow_id', as: 'cow' });
+
+Cow.hasMany(HealthRecord, { foreignKey: 'cow_id', as: 'health_records' });
+HealthRecord.belongsTo(Cow, { foreignKey: 'cow_id', as: 'cow' });
+
+Cow.hasMany(FinancialTransaction, { foreignKey: 'related_cow_id', as: 'transactions' });
+FinancialTransaction.belongsTo(Cow, { foreignKey: 'related_cow_id', as: 'cow' });
+
 module.exports = {
   sequelize,
   User,
@@ -35,5 +47,8 @@ module.exports = {
   HeatRecord,
   AIRecord,
   PregnancyRecord,
-  CalvingRecord
+  CalvingRecord,
+  Reminder,
+  HealthRecord,
+  FinancialTransaction
 };

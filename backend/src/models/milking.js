@@ -10,7 +10,11 @@ module.exports = (sequelize) => {
     fat_percentage: DataTypes.DECIMAL(5,2),
     protein_percentage: DataTypes.DECIMAL(5,2),
     scc: DataTypes.INTEGER,
+    lactose_percentage: DataTypes.DECIMAL(5,2),
+    temperature: DataTypes.DECIMAL(4,2),
     milker_name: DataTypes.STRING(100),
+    lactation_number: DataTypes.INTEGER,
+    days_in_milk: DataTypes.INTEGER,
     notes: DataTypes.TEXT
   }, {
     tableName: 'milking_records'
