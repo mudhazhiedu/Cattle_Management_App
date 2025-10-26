@@ -6,11 +6,13 @@ import {
 import { ArrowBack as BackIcon, Edit as EditIcon } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 import { format } from 'date-fns';
 
 export default function CowDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
   const [cow, setCow] = useState(null);
   const [milkingRecords, setMilkingRecords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,9 +61,11 @@ export default function CowDetail() {
         <Button startIcon={<BackIcon />} onClick={() => navigate(-1)}>
           Back
         </Button>
-        <Button startIcon={<EditIcon />} variant="contained">
-          Edit
-        </Button>
+        {isAdmin() && (
+          <Button startIcon={<EditIcon />} variant="contained">
+            Edit
+          </Button>
+        )}
       </Box>
 
       <Paper sx={{ p: 3, mb: 3 }}>

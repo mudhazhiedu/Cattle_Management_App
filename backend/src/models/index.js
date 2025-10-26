@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/database');
 
+const User = require('./user')(sequelize);
 const Cow = require('./cow')(sequelize);
 const MilkingRecord = require('./milking')(sequelize);
 const HeatRecord = require('./heat')(sequelize);
@@ -28,6 +29,7 @@ CalvingRecord.belongsTo(PregnancyRecord, { foreignKey: 'pregnancy_id', as: 'preg
 
 module.exports = {
   sequelize,
+  User,
   Cow,
   MilkingRecord,
   HeatRecord,

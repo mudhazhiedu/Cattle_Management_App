@@ -1,11 +1,18 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon } from '@mui/icons-material';
+import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon, Logout as LogoutIcon } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Layout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -38,6 +45,18 @@ export default function Layout({ children }) {
           >
             Breeding
           </Button>
+          <Box sx={{ ml: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography variant="body2">
+              {user?.fullName} ({user?.role})
+            </Typography>
+            <Button
+              color="inherit"
+              startIcon={<LogoutIcon />}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box component="main" sx={{ flexGrow: 1 }}>

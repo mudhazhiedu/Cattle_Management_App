@@ -5,6 +5,8 @@ const { sequelize } = require('./models');
 const cowsRouter = require('./routes/cows');
 const milkingRouter = require('./routes/milking');
 const breedingRouter = require('./routes/breeding');
+const authRouter = require('./routes/auth');
+const seedAdmin = require('./utils/seedAdmin');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,6 +16,7 @@ app.use(express.json());
 
 app.get('/health', (req, res) => res.json({ status: 'ok', service: 'Cattle Management API' }));
 
+app.use('/api/auth', authRouter);
 app.use('/api/cows', cowsRouter);
 app.use('/api/milking', milkingRouter);
 app.use('/api/breeding', breedingRouter);
@@ -28,6 +31,7 @@ async function start() {
     await sequelize.authenticate();
     await sequelize.sync({ alter: true });
     console.log('Database connected');
+    await seedAdmin();
     app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on port ${PORT}`));
   } catch (err) {
     console.error('Failed to start', err);

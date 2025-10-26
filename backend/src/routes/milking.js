@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { MilkingRecord, Cow } = require('../models');
+const { authenticateToken } = require('../middleware/auth');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -11,7 +12,7 @@ router.get('/', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', authenticateToken, async (req, res, next) => {
   try {
     const { cow_id, record_date, record_time, yield_liters } = req.body;
     if (!cow_id || !record_date || !record_time || !yield_liters) {

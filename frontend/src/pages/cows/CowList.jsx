@@ -4,11 +4,13 @@ import {
 } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import axios from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 import CowTable from '../../components/cows/CowTable';
 import CowForm from '../../components/cows/CowForm';
 import DeleteConfirmDialog from '../../components/common/DeleteConfirmDialog';
 
 export default function CowList() {
+  const { isAdmin } = useAuth();
   const [cows, setCows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -65,13 +67,15 @@ export default function CowList() {
         <Typography variant="h4" component="h1">
           Cattle Management
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleAdd}
-        >
-          Add Cow
-        </Button>
+        {isAdmin() && (
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={handleAdd}
+          >
+            Add Cow
+          </Button>
+        )}
       </Box>
 
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -85,8 +89,8 @@ export default function CowList() {
       ) : (
         <CowTable
           cows={cows}
-          onEdit={handleEdit}
-          onDelete={handleDeleteClick}
+          onEdit={isAdmin() ? handleEdit : null}
+          onDelete={isAdmin() ? handleDeleteClick : null}
         />
       )}
 

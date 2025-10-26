@@ -59,12 +59,16 @@ export default function CowTable({ cows, onEdit, onDelete }) {
                 <IconButton size="small" onClick={() => navigate(`/cows/${cow.id}`)} color="info">
                   <ViewIcon fontSize="small" />
                 </IconButton>
-                <IconButton size="small" onClick={() => onEdit(cow)} color="primary">
-                  <EditIcon fontSize="small" />
-                </IconButton>
-                <IconButton size="small" onClick={() => onDelete(cow)} color="error">
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
+                {onEdit && (
+                  <IconButton size="small" onClick={() => onEdit(cow)} color="primary">
+                    <EditIcon fontSize="small" />
+                  </IconButton>
+                )}
+                {onDelete && (
+                  <IconButton size="small" onClick={() => onDelete(cow)} color="error">
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                )}
               </TableCell>
             </TableRow>
           ))}
