@@ -37,5 +37,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
+          file: ./frontend/Dockerfile.prod
           push: true
           tags: ghcr.io/mudhazhiedu/cattle_management_app-frontend:latest
