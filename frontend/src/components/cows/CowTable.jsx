@@ -3,10 +3,12 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Paper, IconButton, Chip
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import { format } from 'date-fns';
+import { Edit as EditIcon, Delete as DeleteIcon, Visibility as ViewIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 export default function CowTable({ cows, onEdit, onDelete }) {
+  const navigate = useNavigate();
+  
   const getStatusColor = (status) => {
     const colors = {
       'Milking': 'success',
@@ -54,6 +56,9 @@ export default function CowTable({ cows, onEdit, onDelete }) {
               </TableCell>
               <TableCell>{cow.current_weight || '-'}</TableCell>
               <TableCell align="right">
+                <IconButton size="small" onClick={() => navigate(`/cows/${cow.id}`)} color="info">
+                  <ViewIcon fontSize="small" />
+                </IconButton>
                 <IconButton size="small" onClick={() => onEdit(cow)} color="primary">
                   <EditIcon fontSize="small" />
                 </IconButton>

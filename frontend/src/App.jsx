@@ -1,6 +1,10 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import Layout from './components/common/Layout';
+import Dashboard from './pages/dashboard/Dashboard';
 import CowList from './pages/cows/CowList';
+import CowDetail from './pages/cows/CowDetail';
 
 const theme = createTheme({
   palette: {
@@ -17,7 +21,15 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <CowList />
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/cows" element={<CowList />} />
+            <Route path="/cows/:id" element={<CowDetail />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
