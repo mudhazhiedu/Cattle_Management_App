@@ -5,6 +5,7 @@ import Layout from './components/common/Layout';
 import Dashboard from './pages/dashboard/Dashboard';
 import CowList from './pages/cows/CowList';
 import CowDetail from './pages/cows/CowDetail';
+import BreedingManagement from './pages/breeding/BreedingManagement';
 
 const theme = createTheme({
   palette: {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/cows" element={<CowList />} />
             <Route path="/cows/:id" element={<CowDetail />} />
+            <Route path="/breeding" element={<BreedingManagement />} />
           </Routes>
         </Layout>
       </BrowserRouter>

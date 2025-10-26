@@ -4,6 +4,7 @@ require('dotenv').config();
 const { sequelize } = require('./models');
 const cowsRouter = require('./routes/cows');
 const milkingRouter = require('./routes/milking');
+const breedingRouter = require('./routes/breeding');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok', service: 'Cattle Manag
 
 app.use('/api/cows', cowsRouter);
 app.use('/api/milking', milkingRouter);
+app.use('/api/breeding', breedingRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);

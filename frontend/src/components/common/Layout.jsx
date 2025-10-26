@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { Dashboard as DashboardIcon, Pets as PetsIcon } from '@mui/icons-material';
+import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Layout({ children }) {
@@ -29,6 +29,14 @@ export default function Layout({ children }) {
             sx={{ fontWeight: location.pathname === '/cows' ? 'bold' : 'normal' }}
           >
             Cows
+          </Button>
+          <Button
+            color="inherit"
+            startIcon={<BreedingIcon />}
+            onClick={() => navigate('/breeding')}
+            sx={{ fontWeight: location.pathname === '/breeding' ? 'bold' : 'normal' }}
+          >
+            Breeding
           </Button>
         </Toolbar>
       </AppBar>
