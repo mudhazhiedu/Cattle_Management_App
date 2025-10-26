@@ -180,6 +180,14 @@ docker-compose -f docker-compose.ec2.yml pull
 docker-compose -f docker-compose.ec2.yml up -d
 ```
 
+**Step 7b: If frontend doesn't load (shows connection reset):**
+```bash
+cd ~/Cattle_Management_App/frontend
+docker build -f Dockerfile.prod -t ghcr.io/mudhazhiedu/cattle_management_app-frontend:latest .
+cd ~/Cattle_Management_App
+docker-compose -f docker-compose.ec2.yml up -d
+```
+
 **Step 8: Verify deployment**
 ```bash
 docker ps
@@ -271,6 +279,28 @@ echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab
 sudo netstat -tulpn | grep :80
 sudo systemctl stop httpd  # If Apache is running
 ```
+
+### Issue 6: Frontend shows "connection reset" or doesn't load
+```bash
+# Rebuild frontend with production Dockerfile
+cd ~/Cattle_Management_App/frontend
+docker build -f Dockerfile.prod -t ghcr.io/mudhazhiedu/cattle_management_app-frontend:latest .
+cd ~/Cattle_Management_App
+docker-compose -f docker-compose.ec2.yml up -d
+
+# Wait 2 minutes, then test
+curl http://localhost:80
+```
+
+### Issue 7: Windows SSH key permissions error
+```powershell
+cd Downloads
+icacls cattle_prj.pem /inheritance:r
+icacls cattle_prj.pem /grant:r "YOUR_USERNAME:R"
+ssh -i cattle_prj.pem ec2-user@YOUR_EC2_IP
+```
+
+Or use **EC2 Instance Connect** in AWS Console (no key needed)
 
 ---
 
