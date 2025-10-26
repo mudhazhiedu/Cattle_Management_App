@@ -280,16 +280,17 @@ sudo netstat -tulpn | grep :80
 sudo systemctl stop httpd  # If Apache is running
 ```
 
-### Issue 6: Frontend shows "connection reset" or doesn't load
+### Issue 6: Frontend shows empty table (no cow data)
 ```bash
-# Rebuild frontend with production Dockerfile
-cd ~/Cattle_Management_App/frontend
+# Pull latest code with fixed nginx config
+cd ~/Cattle_Management_App
+git pull
+cd frontend
 docker build -f Dockerfile.prod -t ghcr.io/mudhazhiedu/cattle_management_app-frontend:latest .
 cd ~/Cattle_Management_App
 docker-compose -f docker-compose.ec2.yml up -d
 
-# Wait 2 minutes, then test
-curl http://localhost:80
+# Wait 1 minute, refresh browser with Ctrl+F5
 ```
 
 ### Issue 7: Windows SSH key permissions error
