@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon, LocalHospital as HealthIcon, AccountBalance as FinancialIcon, Logout as LogoutIcon } from '@mui/icons-material';
+import { Dashboard as DashboardIcon, Pets as PetsIcon, FavoriteBorder as BreedingIcon, LocalHospital as HealthIcon, AccountBalance as FinancialIcon, Grass as FeedIcon, Logout as LogoutIcon } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -60,6 +60,14 @@ export default function Layout({ children }) {
             sx={{ fontWeight: location.pathname === '/financial' ? 'bold' : 'normal' }}
           >
             Financial
+          </Button>
+          <Button
+            color="inherit"
+            startIcon={<FeedIcon />}
+            onClick={() => navigate('/feed')}
+            sx={{ fontWeight: location.pathname === '/feed' ? 'bold' : 'normal' }}
+          >
+            Feed
           </Button>
           <Box sx={{ ml: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography variant="body2">

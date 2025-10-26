@@ -9,6 +9,7 @@ const authRouter = require('./routes/auth');
 const remindersRouter = require('./routes/reminders');
 const healthRouter = require('./routes/health');
 const financialRouter = require('./routes/financial');
+const feedRouter = require('./routes/feed');
 const seedAdmin = require('./utils/seedAdmin');
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api/breeding', breedingRouter);
 app.use('/api/reminders', remindersRouter);
 app.use('/api/health', healthRouter);
 app.use('/api/financial', financialRouter);
+app.use('/api/feed', feedRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);

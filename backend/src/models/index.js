@@ -11,6 +11,8 @@ const CalvingRecord = require('./calving')(sequelize);
 const Reminder = require('./reminder')(sequelize);
 const HealthRecord = require('./health')(sequelize);
 const FinancialTransaction = require('./financial')(sequelize);
+const FeedInventory = require('./feedInventory')(sequelize);
+const FeedConsumption = require('./feedConsumption')(sequelize);
 
 // Associations
 Cow.hasMany(MilkingRecord, { foreignKey: 'cow_id', as: 'milking_records' });
@@ -39,6 +41,12 @@ HealthRecord.belongsTo(Cow, { foreignKey: 'cow_id', as: 'cow' });
 Cow.hasMany(FinancialTransaction, { foreignKey: 'related_cow_id', as: 'transactions' });
 FinancialTransaction.belongsTo(Cow, { foreignKey: 'related_cow_id', as: 'cow' });
 
+Cow.hasMany(FeedConsumption, { foreignKey: 'cow_id', as: 'feed_consumption' });
+FeedConsumption.belongsTo(Cow, { foreignKey: 'cow_id', as: 'cow' });
+
+FeedInventory.hasMany(FeedConsumption, { foreignKey: 'feed_inventory_id', as: 'consumption_records' });
+FeedConsumption.belongsTo(FeedInventory, { foreignKey: 'feed_inventory_id', as: 'feed' });
+
 module.exports = {
   sequelize,
   User,
@@ -50,5 +58,7 @@ module.exports = {
   CalvingRecord,
   Reminder,
   HealthRecord,
-  FinancialTransaction
+  FinancialTransaction,
+  FeedInventory,
+  FeedConsumption
 };

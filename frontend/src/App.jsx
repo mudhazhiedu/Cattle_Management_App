@@ -7,10 +7,11 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import Login from './pages/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import CowList from './pages/cows/CowList';
-import CowDetail from './pages/cows/CowDetail';
+import CowDetailEnhanced from './pages/cows/CowDetailEnhanced';
 import BreedingManagement from './pages/breeding/BreedingManagement';
 import HealthManagement from './pages/health/HealthManagement';
 import FinancialManagement from './pages/financial/FinancialManagement';
+import FeedManagement from './pages/feed/FeedManagement';
 
 const theme = createTheme({
   palette: {
@@ -37,10 +38,11 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/cows" element={<CowList />} />
-                    <Route path="/cows/:id" element={<CowDetail />} />
+                    <Route path="/cows/:id" element={<CowDetailEnhanced />} />
                     <Route path="/breeding" element={<BreedingManagement />} />
                     <Route path="/health" element={<HealthManagement />} />
                     <Route path="/financial" element={<FinancialManagement />} />
+                    <Route path="/feed" element={<FeedManagement />} />
                   </Routes>
                 </Layout>
               </ProtectedRoute>
