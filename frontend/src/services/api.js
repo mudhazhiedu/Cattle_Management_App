@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const base = '/api';
+// Use backend port 5000 in development, /api in production
+const base = import.meta.env.DEV ? 'http://localhost:5000/api' : '/api';
 
 const instance = axios.create({
   baseURL: base,
